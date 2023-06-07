@@ -1,0 +1,27 @@
+
+BUG :
+- changement resolution (hold on bug) ?
+
+
+
+TODO :
+- zoom smoothing
+- Ocean (shader)
+- style grass, dirt, ocean, pierre, sable et neige
+- atmosphere
+- nuages
+- skybox
+- triangle de selection a styliser (blanc brillant)
+- UI
+- create overhang
+- assets (maison, arbre, mobilier exterieur, fleurs, buisson,...)
+- placement assets procedurale
+- Main menu (selection sauvegarde, parametre et quitter)
+- systeme de sauvegarde
+- gameplay
+
+idee :
+-ecosytem creator :
+	-certaines plantes pousse avec certaines conditions (le joueur doit les mettre en place)
+	-le joueur doit maintenir certain ecosytem tout en creant d'autre.
+	-le joueur doit 

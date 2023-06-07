@@ -1,0 +1,47 @@
+#pragma kernel NBody
+
+
+uint bodyCount;
+
+struct poly
+{
+	int index;
+    int3 verts;
+    int3 neighbors;
+};
+
+
+RWStructuredBuffer<poly> buffer;
+
+[numthreads(4,1,1)]
+void NBody (uint3 id : SV_DispatchThreadID)
+{
+	int count = 0;
+	[loop]
+	for(uint j = 0; j < bodyCount; j++) {
+		if(id.x != j)
+		{
+		  	int shared_vertices = 0;
+			if(buffer[id.x].verts.x == buffer[j].verts.x){shared_vertices++;}
+			if(buffer[id.x].verts.x == buffer[j].verts.y){shared_vertices++;}
+			if(buffer[id.x].verts.x == buffer[j].verts.z){shared_vertices++;}
+			if(buffer[id.x].verts.y == buffer[j].verts.x){shared_vertices++;}
+			if(buffer[id.x].verts.y == buffer[j].verts.y){shared_vertices++;}
+			if(buffer[id.x].verts.y == buffer[j].verts.z){shared_vertices++;}
+			if(buffer[id.x].verts.z == buffer[j].verts.x){shared_vertices++;}
+			if(buffer[id.x].verts.z == buffer[j].verts.y){shared_vertices++;}
+			if(buffer[id.x].verts.z == buffer[j].verts.z){shared_vertices++;}
+          	if (shared_vertices == 2){
+				if(count == 0){buffer[id.x].neighbors.x = buffer[j].index;
+				count++;}
+				if(count == 1){buffer[id.x].neighbors.y = buffer[j].index;
+				count++;}
+				if(count == 2){buffer[id.x].neighbors.z = buffer[j].index;
+				count++;}
+          	}
+			if(count == 3){
+          	  break;
+          	}
+    	}
+	}
+}
